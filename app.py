@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-import jsonify
 import requests
 import pickle
 import numpy as np
@@ -25,13 +24,13 @@ def predict():
         Year = int(request.form["Year"])
         car_age = 2021 - Year
 
-        km_driven = int(request.form("Distance Driven"))
-        seats = float(request.form("Seating Capacity"))
-        mileage_num = float(request.form("Mileage"))
-        engine_num = float(request.form("Engine CC"))
-        max_power_num = float(request.form("Power HP"))
+        km_driven = int(request.form["Distance Driven"])
+        seats = float(request.form["Seating Capacity"])
+        mileage_num = float(request.form["Mileage"])
+        engine_num = float(request.form["Engine CC"])
+        max_power_num = float(request.form["Power HP"])
 
-        owner = int(request.form["Owner"])
+        owner = request.form["Owner"]
         if owner == "First Owner":
             owner_Second_Owner = 0
             owner_Third_Owner = 0
@@ -87,7 +86,7 @@ def predict():
             seller_type_Individual = 0
             seller_type_Trustmark_Dealer = 1
 
-        transmission_Manual = request.form("Transmission Type")
+        transmission_Manual = request.form["Transmission Type"]
         if transmission_Manual == "Manual":
             transmission_Manual = 1
         else:
@@ -123,4 +122,5 @@ def predict():
 
 
 if __name__ == "__main__":
+    app.debug = True
     app.run(debug=True)
