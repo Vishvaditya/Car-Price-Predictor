@@ -110,7 +110,7 @@ def predict():
             owner_Third_Owner,
         ]
         prediction = model.predict([predict_array])
-        output = prediction[0]
+        output = int(prediction[0])
 
         return render_template(
             "site.html",
